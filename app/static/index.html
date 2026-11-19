@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Обёртка Keitaro</title>
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <p class="eyebrow">Keitaro</p>
+      <h1>Обёртка над кампаниями</h1>
+    </div>
+    <p id="meta" class="meta"></p>
+  </header>
+
+  <div id="banner" class="banner" hidden></div>
+
+  <main class="layout">
+    <section class="card">
+      <h2>Новая кампания</h2>
+      <form id="create-form">
+        <label>Имя <input name="name" placeholder="campaign1" required autocomplete="off"></label>
+        <label>Гео <input name="geo" placeholder="MX,AU,RO" required autocomplete="off"></label>
+        <label>Оффер
+          <input id="create-offer" placeholder="поиск по имени или id" autocomplete="off">
+        </label>
+        <div id="create-results" class="results"></div>
+        <button type="submit" class="primary">Создать</button>
+      </form>
+      <p class="hint">Страны из гео уйдут на google.com. Все остальные попадут на выбранный оффер. Домен, группа и источник подставятся из трекера.</p>
+    </section>
+
+    <section class="card">
+      <h2>Открыть кампанию</h2>
+      <form id="open-form" class="row">
+        <input name="keitaro_id" inputmode="numeric" placeholder="id в Keitaro" required>
+        <button type="submit" class="primary">Fetch streams</button>
+      </form>
+      <ul id="campaign-list" class="campaign-list"></ul>
+    </section>
+  </main>
+
+  <section id="editor" class="editor" hidden></section>
+  <script src="/static/app.js"></script>
+</body>
+</html>

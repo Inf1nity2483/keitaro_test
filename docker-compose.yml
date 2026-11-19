@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: keitaro
+      POSTGRES_PASSWORD: keitaro
+      POSTGRES_DB: keitaro
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keitaro -d keitaro"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://keitaro:keitaro@db:5432/keitaro
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
